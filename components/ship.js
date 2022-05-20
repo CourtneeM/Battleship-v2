@@ -1,12 +1,13 @@
 function Ship(length) {
   return {
     length,
-    shipLayout: [...Array(length)],
+    layout: [...Array(length)].map((() => 'o')),
+    coordinates: [],
     hit(i) {
-      this.shipLayout[i] = 'x';
+      this.layout[i] = 'x';
     },
     isSunk() {
-      return this.shipLayout.every((el) => el !== undefined);
+      return this.layout.every((el) => el === 'x');
     },
   };
 }
