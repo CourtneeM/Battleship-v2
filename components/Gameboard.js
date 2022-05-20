@@ -15,11 +15,6 @@ function Gameboard() {
 
   const missedAttacks = [];
 
-  const allShipsSunk = {
-    player: false,
-    computer: false,
-  }
-
   function checkIfOffGrid(shipLength, row, col, direction) {
     if (direction === 'horizontal') {
       return gameboard[row][col + shipLength] === undefined;
@@ -81,10 +76,8 @@ function Gameboard() {
     gameboard[row][col] = 'x';
   }
 
-  function checkIfAllSunk(ships, player) {
-    if (ships.every((ship) => ship.isSunk())) allShipsSunk[player] = true;
-
-    return allShipsSunk[player];
+  function checkIfAllSunk(ships) {
+    ships.every((ship) => ship.isSunk());
   }
 
   return {

@@ -1,5 +1,5 @@
 // const Gameboard = require('../components/Gameboard');
-const placeShip = require('../components/Gameboard');
+// const placeShip = require('../components/Gameboard');
 
 // test('A gameboard object is returned', () => {
 //   expect(Gameboard()).toEqual({
@@ -18,6 +18,6 @@ const placeShip = require('../components/Gameboard');
 //   });
 // });
 
-test('Ship is placed at proper coordinates', () => {
-  expect(placeShip(4, [0, 3], 'horizontal')).toBe('error');
-});
+// test('Ship is placed at proper coordinates', () => {
+//   expect(placeShip(4, [0, 3], 'horizontal')).toBe('error');
+// });
