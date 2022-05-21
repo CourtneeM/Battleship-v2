@@ -1,4 +1,25 @@
+import Ship from '../components/Ship.js';
+
 function Player() {
+  function generateShips() {
+    const defaultShips = [
+      { name: 'carrier', length: 5 },
+      { name: 'battleship', length: 4 },
+      { name: 'destroyer', length: 3 },
+      { name: 'submarine', length: 3 },
+      { name: 'patrol boat', length: 2 },
+    ];
+
+    const ships = {};
+    defaultShips.forEach((ship) => {
+      ships[ship.name] = new Ship(ship.length);
+    });
+
+    return ships;
+  }
+
+  const ships = generateShips();
+
   function checkIfInvalidMove(previousAttacks, row, col) {
     return previousAttacks.some(([prevRow, prevCol]) => prevRow === row && prevCol === col);
   }
@@ -12,7 +33,7 @@ function Player() {
     computerGameboard.receiveAttack(computerShips, row, col);
   }
 
-  function computerMoves(playerGameboard, playerShips) {
+  function computerMove(playerGameboard, playerShips) {
     const previousAttacks = [];
     let row = Math.floor(Math.random() * 10);
     let col = Math.floor(Math.random() * 10);
@@ -23,11 +44,14 @@ function Player() {
     }
 
     playerGameboard.receiveAttack(playerShips, row, col);
+
+    return [row, col];
   }
 
   return {
+    ships,
     playerMove,
-    computerMoves,
+    computerMove,
   };
 }
 
