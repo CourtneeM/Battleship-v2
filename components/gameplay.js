@@ -8,22 +8,23 @@ const gameplay = (() => {
   const computer = new Player();
   const playerGameboard = new Gameboard();
   const computerGameboard = new Gameboard();
-  let currentPlayer = 'computer';
+  let currentPlayer = 'player';
 
   gameboardDisplay.generate(playerGameboard.gameboard);
   gameboardDisplay.generate(computerGameboard.gameboard, true);
 
   [...document.querySelectorAll('.enemy-square')].forEach((square) => {
-    gameboardController.boardListener(computerGameboard, computer.ships, square);
+    gameboardController.boardListener(computerGameboard, computer.ships, square, playerTurn);
   });
 
   function playerTurn(row, col) {
     const computerGameboardContainer = document.querySelector('#enemy-gameboard-container');
 
-    // player.playerMove(computerGameboard, computer.ships, row, col);
+    player.playerMove(computerGameboard, computer.ships, row, col);
     gameboardDisplay.update(computerGameboardContainer, row, col);
 
-    currentPlayer = 'computer';
+    // Wait for valid player move
+    computerTurn();
   }
 
   function computerTurn() {
@@ -31,11 +32,10 @@ const gameplay = (() => {
     const [row, col] = player.computerMove(playerGameboard, player.ships);
     gameboardDisplay.update(playerGameboardContainer, row, col);
 
-    currentPlayer = 'player';
+    // fix computer choosing taken spot
   }
 
   function playRound() {
-    // playerTurn();
     while (currentPlayer === 'computer') {
       computerTurn();
     }
