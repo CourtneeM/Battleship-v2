@@ -39,10 +39,9 @@ function Player() {
     while (checkIfInvalidMove(row, col)) {
       row = Math.floor(Math.random() * 10);
       col = Math.floor(Math.random() * 10);
-      console.log(previousAttacks);
     }
 
-
+    previousAttacks.push([row, col]);
     playerGameboard.receiveAttack(playerShips, row, col);
 
     return [row, col];
@@ -52,6 +51,7 @@ function Player() {
     ships,
     playerMove,
     computerMove,
+    previousAttacks,
   };
 }
 

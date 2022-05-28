@@ -4,10 +4,10 @@ import gameboardController from './event-controller/gameboard.js';
 import Player from './Player.js';
 
 const gameplay = (() => {
-  const player = new Player();
-  const computer = new Player();
-  const playerGameboard = new Gameboard();
-  const computerGameboard = new Gameboard();
+  const player = Player();
+  const computer = Player();
+  const playerGameboard = Gameboard();
+  const computerGameboard = Gameboard();
   let currentPlayer = 'player';
 
   gameboardDisplay.generate(playerGameboard.gameboard);
@@ -28,11 +28,9 @@ const gameplay = (() => {
 
   function computerTurn() {
     const playerGameboardContainer = document.querySelector('.gameboard-container');
-    const [row, col] = player.computerMove(playerGameboard, player.ships);
+    const [row, col] = computer.computerMove(playerGameboard, player.ships);
 
     gameboardDisplay.update(playerGameboardContainer, row, col);
-
-    // fix computer choosing taken spot
   }
 
   function playRound() {
