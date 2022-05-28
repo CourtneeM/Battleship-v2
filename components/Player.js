@@ -18,30 +18,30 @@ function Player() {
     return ships;
   }
 
+  const previousAttacks = [];
   const ships = generateShips();
 
-  function checkIfInvalidMove(previousAttacks, row, col) {
+  function checkIfInvalidMove(row, col) {
     return previousAttacks.some(([prevRow, prevCol]) => prevRow === row && prevCol === col);
   }
 
   function playerMove(computerGameboard, computerShips, row, col) {
-    const previousAttacks = [];
-
-    if (checkIfInvalidMove(previousAttacks, row, col)) return 'Location has already attacked. Choose another location';
+    if (checkIfInvalidMove(row, col)) return 'invalid';
 
     previousAttacks.push([row, col]);
     computerGameboard.receiveAttack(computerShips, row, col);
   }
 
   function computerMove(playerGameboard, playerShips) {
-    const previousAttacks = [];
     let row = Math.floor(Math.random() * 10);
     let col = Math.floor(Math.random() * 10);
 
-    while (checkIfInvalidMove(previousAttacks, row, col)) {
+    while (checkIfInvalidMove(row, col)) {
       row = Math.floor(Math.random() * 10);
       col = Math.floor(Math.random() * 10);
+      console.log(previousAttacks);
     }
+
 
     playerGameboard.receiveAttack(playerShips, row, col);
 

@@ -20,16 +20,16 @@ const gameplay = (() => {
   function playerTurn(row, col) {
     const computerGameboardContainer = document.querySelector('#enemy-gameboard-container');
 
-    player.playerMove(computerGameboard, computer.ships, row, col);
+    if (player.playerMove(computerGameboard, computer.ships, row, col) === 'invalid') return;
     gameboardDisplay.update(computerGameboardContainer, row, col);
 
-    // Wait for valid player move
     computerTurn();
   }
 
   function computerTurn() {
     const playerGameboardContainer = document.querySelector('.gameboard-container');
     const [row, col] = player.computerMove(playerGameboard, player.ships);
+
     gameboardDisplay.update(playerGameboardContainer, row, col);
 
     // fix computer choosing taken spot
