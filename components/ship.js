@@ -2,7 +2,13 @@ function Ship(length) {
   return {
     length,
     layout: [...Array(length)].map((() => 'o')),
-    coordinates: [],
+    coordinates: [
+      [0, 1],
+      [0, 2],
+      [0, 3],
+      [0, 4],
+      [0, 5],
+    ],
     hit(i) {
       this.layout[i] = 'x';
     },

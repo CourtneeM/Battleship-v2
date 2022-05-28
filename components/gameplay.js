@@ -3,12 +3,11 @@ import gameboardDisplay from './display-controller/gameboard.js';
 import gameboardController from './event-controller/gameboard.js';
 import Player from './Player.js';
 
-const gameplay = (() => {
+function gameplay() {
   const player = Player();
   const computer = Player();
   const playerGameboard = Gameboard();
   const computerGameboard = Gameboard();
-  let currentPlayer = 'player';
 
   gameboardDisplay.generate(playerGameboard.gameboard);
   gameboardDisplay.generate(computerGameboard.gameboard, true);
@@ -23,6 +22,7 @@ const gameplay = (() => {
     if (player.playerMove(computerGameboard, computer.ships, row, col) === 'invalid') return;
     gameboardDisplay.update(computerGameboardContainer, row, col);
 
+    if (checkForWinner(computer)) console.log('player is the winner!');
     computerTurn();
   }
 
@@ -31,19 +31,12 @@ const gameplay = (() => {
     const [row, col] = computer.computerMove(playerGameboard, player.ships);
 
     gameboardDisplay.update(playerGameboardContainer, row, col);
+    if (checkForWinner(player)) console.log('computer is the winner!');
   }
 
-  function playRound() {
-    while (currentPlayer === 'computer') {
-      computerTurn();
-    }
-
-    // check if winner
+  function checkForWinner(currentPlayer) {
+    return Object.values(currentPlayer.ships).every((ship) => ship.isSunk());
   }
-
-  return {
-    playRound,
-  };
-})();
+}
 
 export default gameplay;

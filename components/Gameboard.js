@@ -2,13 +2,13 @@
 function Gameboard() {
   const gameboard = [
     ['', 'o', 'o', 'o', 'o', 'o', '', '', '', ''],
-    ['', '', '', '', '', '', '', 'o', '', ''],
-    ['', 'o', '', '', '', '', '', 'o', '', ''],
-    ['', 'o', '', '', '', '', '', 'o', '', ''],
-    ['', 'o', '', '', '', '', '', 'o', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
-    ['', '', '', '', 'o', 'o', 'o', '', '', ''],
-    ['', 'o', 'o', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
   ];
@@ -44,6 +44,7 @@ function Gameboard() {
 
       for (let i = 0; i < ship.length; i++) {
         gameboard[row][col + i] = 'o';
+        ship.coordinates.push([row, col + i]);
       }
     } else if (direction === 'vertical') {
       if (checkIfOffGrid(ship.length, row, col, direction)) return 'Error, cannot place ship off grid';
@@ -51,10 +52,9 @@ function Gameboard() {
 
       for (let i = 0; i < ship.length; i++) {
         gameboard[row + i][col] = 'o';
+        ship.coordinates.push([row + i, col]);
       }
     }
-
-    ship.coordinates.push([row, col]);
   }
 
   function receiveAttack(ships, row, col) {
