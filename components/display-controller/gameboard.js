@@ -3,9 +3,21 @@ import gameboardController from "../event-controller/gameboard.js";
 const gameboardDisplay = (() => {
   function generate(gameboard, interactive = false) {
     const gameboardContainer = document.createElement('div');
+    const gameboardLabel = document.createElement('p');
+    const gridContainer = document.createElement('div');
 
-    gameboardContainer.id = interactive ? 'enemy-gameboard-container' : 'player-gameboard-container';
+    if (interactive) {
+      gameboardContainer.id = 'enemy-gameboard-container';
+      gameboardLabel.classList.add('gameboard-label');
+      gameboardLabel.textContent = 'Computer';
+    } else {
+      gameboardContainer.id = 'player-gameboard-container';
+      gameboardLabel.classList.add('gameboard-label');
+      gameboardLabel.textContent = 'Player';
+    }
+
     gameboardContainer.classList.add('gameboard-container');
+    gridContainer.classList.add('grid-container');
 
     gameboard.forEach((row) => {
       const rowDiv = document.createElement('div');
@@ -23,7 +35,8 @@ const gameboardDisplay = (() => {
         rowDiv.appendChild(colDiv);
       });
 
-      gameboardContainer.appendChild(rowDiv);
+      gridContainer.appendChild(rowDiv);
+      [gameboardLabel, gridContainer].forEach((el) => gameboardContainer.appendChild(el));
       document.querySelector('body').appendChild(gameboardContainer);
     });
 

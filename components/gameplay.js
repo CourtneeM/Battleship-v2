@@ -1,4 +1,5 @@
 import Gameboard from './Gameboard.js';
+import shipPlacementDisplay from './display-controller/ship-placement.js';
 import gameboardDisplay from './display-controller/gameboard.js';
 import gameboardController from './event-controller/gameboard.js';
 import Player from './Player.js';
@@ -10,6 +11,7 @@ function gameplay() {
   const computerGameboard = Gameboard();
   let gameOver = false;
 
+  shipPlacementDisplay(player);
   gameboardDisplay.generate(playerGameboard.gameboard);
   gameboardDisplay.generate(computerGameboard.gameboard, true);
 
@@ -56,3 +58,7 @@ function gameplay() {
 }
 
 export default gameplay;
+
+// add ship placement in UI
+// 3 drop downs with numbers 0-9 on the first two, horizontal/vertical on last
+// place ship button next to drop downs

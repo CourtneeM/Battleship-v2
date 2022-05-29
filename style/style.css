@@ -6,6 +6,15 @@ body {
   height: 100vh;
 }
 
+#ship-placement-container {
+  flex: 1 1 100%;
+  text-align: center;
+}
+#ship-placement-container #ships-selector {
+  display: block;
+  margin: 0 auto 10px;
+}
+
 #game-over-container {
   flex: 1 1 100%;
   text-align: center;
@@ -14,11 +23,16 @@ body {
 .gameboard-container {
   margin-right: 50px;
 }
-.gameboard-container .row {
+.gameboard-container .gameboard-label {
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: 600;
+}
+.gameboard-container .grid-container .row {
   display: flex;
   flex-wrap: wrap;
 }
-.gameboard-container .col {
+.gameboard-container .grid-container .col {
   display: flex;
   justify-content: center;
   align-items: center;
