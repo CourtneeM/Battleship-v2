@@ -49,7 +49,9 @@ function gameplay() {
   function endGame(winner) {
     gameOver = true;
     gameboardDisplay.endGame(winner);
-    // declare winner and lock down boards
+
+    const resetBtn = document.querySelector('#reset-btn');
+    resetBtn.addEventListener('click', gameplay);
   }
 }
 

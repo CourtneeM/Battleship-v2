@@ -10,8 +10,15 @@ const gameboardController = (() => {
     });
   }
 
+  function resetBtnListener(resetBtn, clear) {
+    resetBtn.addEventListener('click', () => {
+      clear();
+    });
+  }
+
   return {
     boardListener,
+    resetBtnListener,
   };
 })();
 

@@ -1,3 +1,5 @@
+import gameboardController from "../event-controller/gameboard.js";
+
 const gameboardDisplay = (() => {
   function generate(gameboard, interactive = false) {
     const gameboardContainer = document.createElement('div');
@@ -36,22 +38,34 @@ const gameboardDisplay = (() => {
   }
 
   function clear() {
-    // remove gameboard and call generate
+    const body = document.querySelector('body');
+    while (body.firstChild) {
+      body.removeChild(body.firstChild);
+    }
   }
 
   function endGame(winner) {
     const body = document.querySelector('body');
+    const gameOverDiv = document.createElement('div');
     const winningMessageP = document.createElement('p');
+    const resetBtn = document.createElement('button');
 
+    gameOverDiv.id = 'game-over-container';
     winningMessageP.id = 'winning-message';
+    resetBtn.id = 'reset-btn';
     winningMessageP.textContent = `${winner} is the winner!`;
+    resetBtn.textContent = 'Reset Game';
 
-    body.insertBefore(winningMessageP, body.firstChild);
+    gameboardController.resetBtnListener(resetBtn, clear, generate);
+
+    [winningMessageP, resetBtn].forEach((el) => gameOverDiv.appendChild(el));
+    body.insertBefore(gameOverDiv, body.firstChild);
   }
 
   return {
     generate,
     update,
+    clear,
     endGame,
   };
 })();
