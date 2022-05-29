@@ -39,9 +39,20 @@ const gameboardDisplay = (() => {
     // remove gameboard and call generate
   }
 
+  function endGame(winner) {
+    const body = document.querySelector('body');
+    const winningMessageP = document.createElement('p');
+
+    winningMessageP.id = 'winning-message';
+    winningMessageP.textContent = `${winner} is the winner!`;
+
+    body.insertBefore(winningMessageP, body.firstChild);
+  }
+
   return {
     generate,
     update,
+    endGame,
   };
 })();
 
