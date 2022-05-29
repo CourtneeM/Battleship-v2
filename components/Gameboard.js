@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 function Gameboard() {
   const gameboard = [
-    ['', 'o', 'o', 'o', 'o', 'o', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
@@ -17,10 +17,10 @@ function Gameboard() {
 
   function checkIfOffGrid(shipLength, row, col, direction) {
     if (direction === 'horizontal') {
-      return gameboard[row][col + shipLength] === undefined;
+      return gameboard[row][col + shipLength - 1] === undefined;
     }
 
-    return gameboard[row + shipLength][col] === undefined;
+    return gameboard[row + shipLength - 1][col] === undefined;
   }
 
   function checkIfOccupied(shipLength, row, col, direction) {
@@ -39,16 +39,16 @@ function Gameboard() {
 
   function placeShip(ship, [row, col], direction) {
     if (direction === 'horizontal') {
-      if (checkIfOffGrid(ship.length, row, col, direction)) return 'Error, cannot place ship off grid';
-      if (checkIfOccupied(ship.length, row, col, direction)) return 'Space occupied by another ship';
+      if (checkIfOffGrid(ship.length, row, col, direction)) return true;
+      if (checkIfOccupied(ship.length, row, col, direction)) return true;
 
       for (let i = 0; i < ship.length; i++) {
         gameboard[row][col + i] = 'o';
         ship.coordinates.push([row, col + i]);
       }
     } else if (direction === 'vertical') {
-      if (checkIfOffGrid(ship.length, row, col, direction)) return 'Error, cannot place ship off grid';
-      if (checkIfOccupied(ship.length, row, col, direction)) return 'Space occupied by another ship';
+      if (checkIfOffGrid(ship.length, row, col, direction)) return true;
+      if (checkIfOccupied(ship.length, row, col, direction)) return true;
 
       for (let i = 0; i < ship.length; i++) {
         gameboard[row + i][col] = 'o';

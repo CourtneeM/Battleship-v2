@@ -43,6 +43,23 @@ const gameboardDisplay = (() => {
     return gameboardContainer;
   }
 
+  function placeShip(gameboard, length, rowIndex, colIndex, orientation) {
+    if (orientation === 'horizontal') {
+      const row = [...gameboard.children][rowIndex];
+      for (let i = colIndex; i < colIndex + length; i++) {
+        [...row.children][i].textContent = 'o';
+      }
+    }
+
+    if (orientation === 'vertical') {
+      for (let i = rowIndex; i < rowIndex + length; i++) {
+        const row = [...gameboard.children][i];
+
+        [...row.children][colIndex].textContent = 'o';
+      }
+    }
+  }
+
   function update(gameboard, rowIndex, colIndex) {
     const row = [...gameboard.children][rowIndex];
     const square = [...row.children][colIndex];
@@ -77,6 +94,7 @@ const gameboardDisplay = (() => {
 
   return {
     generate,
+    placeShip,
     update,
     clear,
     endGame,

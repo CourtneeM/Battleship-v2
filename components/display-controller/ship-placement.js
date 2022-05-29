@@ -1,3 +1,5 @@
+import shipPlacementListener from "../event-controller/ship-placement.js";
+
 function shipsDisplay(player) {
   const shipsDropDown = document.createElement('select');
   shipsDropDown.id = 'ships-selector';
@@ -16,9 +18,12 @@ function shipsDisplay(player) {
 
 function coordinatesDropDown() {
   const rowDropDown = document.createElement('select');
-  const colDownDrop = document.createElement('select');
+  const colDropDown = document.createElement('select');
 
-  [rowDropDown, colDownDrop].forEach((select) => {
+  rowDropDown.id = 'row-drop-down';
+  colDropDown.id = 'col-drop-down';
+
+  [rowDropDown, colDropDown].forEach((select) => {
     for (let i = 0; i <= 9; i++) {
       const option = document.createElement('option');
       option.value = i;
@@ -27,13 +32,15 @@ function coordinatesDropDown() {
     }
   });
 
-  return [rowDropDown, colDownDrop];
+  return [rowDropDown, colDropDown];
 }
 
 function orientationDropDown() {
   const orientationDropDown = document.createElement('select');
   const horizontalOption = document.createElement('option');
   const verticalOption = document.createElement('option');
+
+  orientationDropDown.id = 'orientation-drop-down';
 
   horizontalOption.value = 'horizontal';
   horizontalOption.textContent = 'horizontal';
@@ -50,10 +57,9 @@ function shipPlacementDisplay(player) {
   const placeShipBtn = document.createElement('button');
 
   shipPlacementContainer.id = 'ship-placement-container';
+  placeShipBtn.id = 'place-ship-btn';
 
   placeShipBtn.textContent = 'Place Ship';
-  // add event listener
-
   [shipsDisplay(player), ...coordinatesDropDown(), orientationDropDown(), placeShipBtn]
     .forEach((el) => shipPlacementContainer.appendChild(el));
 

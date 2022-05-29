@@ -2,6 +2,7 @@ import Gameboard from './Gameboard.js';
 import shipPlacementDisplay from './display-controller/ship-placement.js';
 import gameboardDisplay from './display-controller/gameboard.js';
 import gameboardController from './event-controller/gameboard.js';
+import shipPlacementController from './event-controller/ship-placement.js';
 import Player from './Player.js';
 
 function gameplay() {
@@ -19,10 +20,12 @@ function gameplay() {
     gameboardController.boardListener(computerGameboard, computer.ships, square, playerTurn);
   });
 
+  shipPlacementController(document.querySelector('#place-ship-btn'), player, playerGameboard, gameboardDisplay.placeShip);
+
   function playerTurn(row, col) {
     if (gameOver) return;
 
-    const computerGameboardContainer = document.querySelector('#enemy-gameboard-container');
+    const computerGameboardContainer = document.querySelector('#enemy-gameboard-container > .grid-container');
 
     if (player.playerMove(computerGameboard, computer.ships, row, col) === 'invalid') return;
     gameboardDisplay.update(computerGameboardContainer, row, col);
@@ -37,7 +40,7 @@ function gameplay() {
   function computerTurn() {
     if (gameOver) return;
 
-    const playerGameboardContainer = document.querySelector('.gameboard-container');
+    const playerGameboardContainer = document.querySelector('.gameboard-container > .grid-container');
     const [row, col] = computer.computerMove(playerGameboard, player.ships);
 
     gameboardDisplay.update(playerGameboardContainer, row, col);
