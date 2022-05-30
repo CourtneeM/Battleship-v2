@@ -22,8 +22,8 @@ function gameplay() {
     });
   }
 
-  // wait for player to place all ships and computer ships randomly placed before allowing clicking
   shipPlacementController(document.querySelector('#place-ship-btn'), player, playerGameboard, gameboardDisplay.placeShip, activateBoard);
+  computerGameboard.placeEnemyShips(computer);
 
   function playerTurn(row, col) {
     if (gameOver) return;
