@@ -60,10 +60,19 @@ const gameboardDisplay = (() => {
     }
   }
 
-  function update(gameboard, rowIndex, colIndex) {
-    const row = [...gameboard.children][rowIndex];
+  function update(gameboardContainer, rowIndex, colIndex, computerShips = null) {
+    const row = [...gameboardContainer.children][rowIndex];
     const square = [...row.children][colIndex];
 
+    if (computerShips) {
+      Object.values(computerShips).forEach((ship) => {
+        ship.coordinates.forEach(([shipRow, shipCol]) => {
+          if (shipRow === rowIndex && shipCol === colIndex) square.classList.add('hit');
+        });
+      });
+    }
+
+    if (square.textContent === 'o') square.classList.add('hit');
     square.textContent = 'x';
   }
 

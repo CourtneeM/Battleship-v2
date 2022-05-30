@@ -58,19 +58,18 @@ function Gameboard() {
     }
   }
 
-  // when player hits enemy ship, display red 'x'
-  // (either give squares with enemy ship a special class at start or **after hit**)
   function placeEnemyShips(computer) {
+    const directions = ['horizontal', 'vertical'];
     let row = Math.floor(Math.random() * 10);
     let col = Math.floor(Math.random() * 10);
-    let direction = ['horizontal', 'vertical'][Math.floor(Math.random() * 2)];
+    let direction = directions[Math.floor(Math.random() * 2)];
 
     Object.values(computer.ships).forEach((ship) => {
       while (checkIfOffGrid(ship.length, row, col, direction)
       || checkIfOccupied(ship.length, row, col, direction)) {
         row = Math.floor(Math.random() * 10);
         col = Math.floor(Math.random() * 10);
-        direction = ['horizontal', 'vertical'][Math.floor(Math.random() * 2)];
+        direction = directions[Math.floor(Math.random() * 2)];
       }
       placeShip(ship, [row, col], direction);
     });
