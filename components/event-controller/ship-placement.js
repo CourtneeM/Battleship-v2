@@ -1,4 +1,4 @@
-function shipPlacementController(placeShipBtn, player, playerGameboard, placeShip) {
+function shipPlacementController(placeShipBtn, player, playerGameboard, placeShip, activateBoard) {
   placeShipBtn.addEventListener('click', () => {
     const shipSelectorEl = document.querySelector('#ships-selector');
     const selectedShipEl = [...shipSelectorEl.children][shipSelectorEl.selectedIndex];
@@ -23,6 +23,7 @@ function shipPlacementController(placeShipBtn, player, playerGameboard, placeShi
 
     if ([...shipSelectorEl.children].length === 0) {
       document.querySelector('body').removeChild(document.querySelector('#ship-placement-container'));
+      activateBoard();
     }
   });
 }

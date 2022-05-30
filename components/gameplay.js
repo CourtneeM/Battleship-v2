@@ -16,11 +16,14 @@ function gameplay() {
   gameboardDisplay.generate(playerGameboard.gameboard);
   gameboardDisplay.generate(computerGameboard.gameboard, true);
 
-  [...document.querySelectorAll('.enemy-square')].forEach((square) => {
-    gameboardController.boardListener(computerGameboard, computer.ships, square, playerTurn);
-  });
+  function activateBoard() {
+    [...document.querySelectorAll('.enemy-square')].forEach((square) => {
+      gameboardController.boardListener(computerGameboard, computer.ships, square, playerTurn);
+    });
+  }
 
-  shipPlacementController(document.querySelector('#place-ship-btn'), player, playerGameboard, gameboardDisplay.placeShip);
+  // wait for player to place all ships and computer ships randomly placed before allowing clicking
+  shipPlacementController(document.querySelector('#place-ship-btn'), player, playerGameboard, gameboardDisplay.placeShip, activateBoard);
 
   function playerTurn(row, col) {
     if (gameOver) return;
